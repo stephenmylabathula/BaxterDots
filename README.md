@@ -1,9 +1,10 @@
 # BaxterDots
 
-To run the inverse kinematics code simpy run the following commands:
+To run the blob detection code, run the following commands:
 
 ```
-cd src/experimental
-python myIK.py
+cd src/BaxterConnectDots
+python connect_dots_v1.py
 ```
-Follow and edit the code in myIK.py to change the target pose for planning.
+
+Make sure that bot arms start from a retracted pose.
