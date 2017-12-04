@@ -96,11 +96,13 @@ right_arm = 'right'
 
 # create a baxter IK object
 bik = BaxterIK(right_arm)	# replace with left arm if you want to plan for that
-#time.sleep(1)
-#bik.gripper_close()
-#time.sleep(1)
+
+time.sleep(1)
+bik.gripper_close()
+time.sleep(1)
+
 # Define a Pose to Plan to
-goal_pose = Pose(position=Point(x=0.55, y=0.2, z=-0.195), orientation=Quaternion(x=1.0, y=0.0, z=0.0, w=0.0))
+goal_pose = Pose(position=Point(x=0.3, y=0.0, z=0.0), orientation=Quaternion(x=1.0, y=0.0, z=0.0, w=0.0))
 
 # Generate joint variables for target pose
 goal_joints = bik.solve_ik(goal_pose)
@@ -109,8 +111,3 @@ goal_joints = bik.solve_ik(goal_pose)
 bik.guarded_move_to_joint_position(goal_joints)
 
 ''' CODE ENDS HERE '''
-
-
-
-
-

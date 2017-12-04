@@ -37,7 +37,7 @@ class dots_setup():
 
         # start positions
         self.x     = 0.60                        # x     = front back
-        self.y     = 0.20                        # y     = left right
+        self.y     = 0.00                        # y     = left right
         self.z     = 0.15                        # z     = up down
         self.roll  = -1.0 * math.pi              # roll  = horizontal
         self.pitch = 0.0 * math.pi               # pitch = vertical
@@ -123,7 +123,7 @@ class dots_setup():
         f.write(s)
 
 def main():
-    limb  = "right"
+    limb  = "left"
     setup = dots_setup(limb)
 
     # open the gripper

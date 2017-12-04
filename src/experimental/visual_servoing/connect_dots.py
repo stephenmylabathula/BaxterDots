@@ -89,7 +89,6 @@ def camera_callback(data, camera_name):
         cv2.imshow('Baxter', cv_image)
     except cv_bridge.CvBridgeError, e:
         print e
-
     # 3ms wait
     cv2.waitKey(3)
 
@@ -125,7 +124,7 @@ def subscribe_to_camera(camera):
 
 
 
-limb = 'right'
+limb = 'left'
 width = 960
 height = 600
 
@@ -156,5 +155,3 @@ while True:
     time.sleep(0.1)
     #if cv_image is not None:
      #   print cv_image
-        
-
