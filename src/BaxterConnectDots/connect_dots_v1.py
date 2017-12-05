@@ -127,6 +127,14 @@ class RobotMotion:
     def calibrate_gripper(self):
         self.gripper.calibrate()
 
+    # Close Gripper
+    def close_gripper(self):
+        self.gripper.close()
+
+    # Open Gripper
+    def open_gripper(self):
+        self.gripper.open()
+
 
 class RobotVision:
 
@@ -287,14 +295,22 @@ def pixel_to_baxter(px, dist, cam_calib=0.0025, cam_x_offset=0.045, cam_y_offset
 
 def main():
 
-    """ Right Arm Must NOT Be Overhead Initially """
+    overhead_pose = [0.6, 0.0, 0.1, -math.pi, 0.0, 0.0]
+
+    # Move Out Right Arm
+    print "Moving Right Arm to Side"
+    motion = RobotMotion()
+    pose = [0.2, -1.0, 0.2, -math.pi, 0.0, 0.0]  # Right Arm to Side Pose
+    motion.calibrate_gripper()
+    motion.ik_move('right', pose)
+    time.sleep(2)
+    motion.close_gripper()
 
     # Move Left Arm to Start Position
     print "Moving Left Arm to Start Position"
-    motion = RobotMotion()
-    pose = [0.6, 0.0, 0.15, -math.pi, 0.0, 0.0]     # Overhead Pose
+    pose = overhead_pose     # Overhead Pose
     motion.ik_move('left', pose)
-    time.sleep(2)
+    time.sleep(1)
     camera_table_distance = motion.get_distance('left')
     print camera_table_distance
 
@@ -303,26 +319,38 @@ def main():
     vision = RobotVision()
     dot_locations = vision.find_dots(6)     # Find 6 Dots
     print dot_locations
-    dot_locations = np.array(dot_locations)
+    dot_locations = np.array(dot_locations, dtype=np.int16)
     print "Found All Dots!"
 
     # Move Out Left Arm
     print "Moving Left Arm to Side"
     pose = [0.2, 1.0, 0.2, -math.pi, 0.0, 0.0]      # Left Arm to Side Pose
     motion.ik_move('left', pose)
-    time.sleep(2)
+    time.sleep(1)
 
     # Move In Right Arm to Start Connecting Dots
     print "Moving Right Arm In"
-    pose = [0.6, 0.0, 0.15, -math.pi, 0.0, 0.0]     # Overhead Pose
+    pose = overhead_pose     # Overhead Pose
     motion.ik_move('right', pose)
-    time.sleep(2)
+    time.sleep(1)
 
-    ''' DOESN"T WORK YET '''
-    baxter_points = np.zeros((6, 2))
+    # Map Pixel to Baxter
+    baxter_points = np.tile([0.0, 0.0, -0.15, -math.pi, 0.0, 0.0], (6, 1))
     for i in range(len(dot_locations)):
-        baxter_points[i] = pixel_to_baxter(dot_locations[i], camera_table_distance)
+        baxter_points[i][:2] = pixel_to_baxter(dot_locations[i], camera_table_distance)
     print baxter_points
+
+    # Move Right Arm to Dot Locations
+    for i in baxter_points:
+        motion.ik_move('right', i)
+        time.sleep(1)
+
+    # Move Out Right Arm
+    print "Moving Right Arm to Side"
+    pose = [0.2, -1.0, 0.2, -math.pi, 0.0, 0.0]  # Right Arm to Side Pose
+    motion.ik_move('right', pose)
+    time.sleep(1)
+
 
 
 if __name__ == "__main__":

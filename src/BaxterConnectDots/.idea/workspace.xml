@@ -14,25 +14,24 @@
       <file leaf-file-name="connect_dots_v1.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/connect_dots_v1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="676">
-              <caret line="321" column="0" lean-forward="false" selection-start-line="321" selection-start-column="0" selection-end-line="321" selection-end-column="0" />
+            <state relative-caret-position="547">
+              <caret line="307" column="0" lean-forward="true" selection-start-line="307" selection-start-column="0" selection-end-line="307" selection-end-column="0" />
               <folding>
                 <element signature="e#14#23#0" expanded="true" />
-                <element signature="e#686#4435#0" expanded="false" />
                 <element signature="e#1638#3833#0" expanded="false" />
                 <element signature="e#3899#4333#0" expanded="false" />
                 <element signature="e#4411#4435#0" expanded="false" />
-                <element signature="e#4462#9656#0" expanded="false" />
-                <element signature="e#4998#5145#0" expanded="false" />
-                <element signature="e#5204#5903#0" expanded="false" />
-                <element signature="e#5963#6580#0" expanded="false" />
-                <element signature="e#6632#6678#0" expanded="false" />
-                <element signature="e#6731#6778#0" expanded="false" />
-                <element signature="e#6831#7308#0" expanded="false" />
-                <element signature="e#7352#7995#0" expanded="false" />
-                <element signature="e#8042#8596#0" expanded="false" />
-                <element signature="e#8642#9189#0" expanded="false" />
-                <element signature="e#9235#9656#0" expanded="false" />
+                <element signature="e#4617#9811#0" expanded="false" />
+                <element signature="e#5153#5300#0" expanded="false" />
+                <element signature="e#5359#6058#0" expanded="false" />
+                <element signature="e#6118#6735#0" expanded="false" />
+                <element signature="e#6787#6833#0" expanded="false" />
+                <element signature="e#6886#6933#0" expanded="false" />
+                <element signature="e#6986#7463#0" expanded="false" />
+                <element signature="e#7507#8150#0" expanded="false" />
+                <element signature="e#8197#8751#0" expanded="false" />
+                <element signature="e#8797#9344#0" expanded="false" />
+                <element signature="e#9390#9811#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -205,25 +204,24 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/connect_dots_v1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="676">
-          <caret line="321" column="0" lean-forward="false" selection-start-line="321" selection-start-column="0" selection-end-line="321" selection-end-column="0" />
+        <state relative-caret-position="547">
+          <caret line="307" column="0" lean-forward="true" selection-start-line="307" selection-start-column="0" selection-end-line="307" selection-end-column="0" />
           <folding>
             <element signature="e#14#23#0" expanded="true" />
-            <element signature="e#686#4435#0" expanded="false" />
             <element signature="e#1638#3833#0" expanded="false" />
             <element signature="e#3899#4333#0" expanded="false" />
             <element signature="e#4411#4435#0" expanded="false" />
-            <element signature="e#4462#9656#0" expanded="false" />
-            <element signature="e#4998#5145#0" expanded="false" />
-            <element signature="e#5204#5903#0" expanded="false" />
-            <element signature="e#5963#6580#0" expanded="false" />
-            <element signature="e#6632#6678#0" expanded="false" />
-            <element signature="e#6731#6778#0" expanded="false" />
-            <element signature="e#6831#7308#0" expanded="false" />
-            <element signature="e#7352#7995#0" expanded="false" />
-            <element signature="e#8042#8596#0" expanded="false" />
-            <element signature="e#8642#9189#0" expanded="false" />
-            <element signature="e#9235#9656#0" expanded="false" />
+            <element signature="e#4617#9811#0" expanded="false" />
+            <element signature="e#5153#5300#0" expanded="false" />
+            <element signature="e#5359#6058#0" expanded="false" />
+            <element signature="e#6118#6735#0" expanded="false" />
+            <element signature="e#6787#6833#0" expanded="false" />
+            <element signature="e#6886#6933#0" expanded="false" />
+            <element signature="e#6986#7463#0" expanded="false" />
+            <element signature="e#7507#8150#0" expanded="false" />
+            <element signature="e#8197#8751#0" expanded="false" />
+            <element signature="e#8797#9344#0" expanded="false" />
+            <element signature="e#9390#9811#0" expanded="false" />
           </folding>
         </state>
       </provider>
