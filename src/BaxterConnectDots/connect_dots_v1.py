@@ -108,6 +108,19 @@ class RobotMotion:
             print 'pitch      = %5.4f ' % rpy_pose[4], "%5.4f" % euler[1]
             print 'yaw        = %5.4f ' % rpy_pose[5], "%5.4f" % euler[2]
 
+    # Get Current Pose in RPY
+    def get_current_pose(self, limb):
+        if limb == 'right':
+            quaternion_pose = self.right_limb_interface.endpoint_pose()
+            euler_pose = tf.transformations.euler_from_quaternion(quaternion_pose['orientation'])
+            position = quaternion_pose['position']
+            return list(position + euler_pose)
+        elif limb == 'left':
+            quaternion_pose = self.left_limb_interface.endpoint_pose()
+            euler_pose = tf.transformations.euler_from_quaternion(quaternion_pose['orientation'])
+            position = quaternion_pose['position']
+            return list(position + euler_pose)
+
     # Get IR Distance
     def get_distance(self, limb):
         if limb == "left":
@@ -286,12 +299,28 @@ class RobotVision:
         return self.current_dots
 
 
+cam_x_offset = 0.045
+cam_y_offset = -0.01
+
 # convert image pixel to Baxter point
-def pixel_to_baxter(px, dist, cam_calib=0.0025, cam_x_offset=0.045, cam_y_offset=-0.01):
-    x = ((px[1] - (600 / 2)) * cam_calib * dist) + 0.6 + cam_x_offset
-    y = ((px[0] - (960 / 2)) * cam_calib * dist) + 0.0 + cam_y_offset
+def pixel_to_baxter(px, dist, cam_calib=0.0025):
+    x = ((px[1] - (600 / 2)) * cam_calib * dist) + 0.6 #+ cam_x_offset
+    y = ((px[0] - (960 / 2)) * cam_calib * dist) + 0.0 #+ cam_y_offset
     return x, y
 
+def get_rotation_between_points(p1, p2):
+    angle = math.atan2(p2[1] - p1[1], p2[0] - p1[0]) + math.pi/2
+    oriented_pose = p1[:]
+
+    if angle <= -math.pi:
+        angle += math.pi
+    elif angle >= math.pi:
+        angle -= math.pi
+
+    oriented_pose[-1] = angle
+    return oriented_pose, \
+           cam_x_offset * math.cos(-angle) - cam_y_offset * math.sin(-angle), \
+           cam_y_offset * math.cos(-angle) + cam_x_offset * math.sin(-angle)
 
 def main():
 
@@ -335,13 +364,24 @@ def main():
     time.sleep(1)
 
     # Map Pixel to Baxter
-    baxter_points = np.tile([0.0, 0.0, -0.15, -math.pi, 0.0, 0.0], (6, 1))
+    baxter_points = np.tile([0.0, 0.0, -0.1, -math.pi, 0.0, 0.0], (6, 1))
     for i in range(len(dot_locations)):
         baxter_points[i][:2] = pixel_to_baxter(dot_locations[i], camera_table_distance)
     print baxter_points
 
     # Move Right Arm to Dot Locations
     for i in baxter_points:
+        # Move Rotational
+        rotation, x_offset, y_offset = get_rotation_between_points(motion.get_current_pose('right'), i)
+        motion.ik_move('right', rotation)
+        time.sleep(1)
+
+        i[3:] = rotation[3:]    # Match orientations of start and goal pose
+        print x_offset, y_offset
+        i[0] += x_offset
+        i[1] += y_offset
+
+        # Move Positional
         motion.ik_move('right', i)
         time.sleep(1)
 
